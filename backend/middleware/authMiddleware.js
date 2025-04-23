@@ -11,6 +11,7 @@ exports.protect = async (req, res, next) => {
         req.user = await User.findById(decoded.id).select('-password');
         next();
     }catch(err){
+        console.error('Token verification failed:', err);
         res.status(401).json({ message: 'Not authorized, token failed' });
     }
 };

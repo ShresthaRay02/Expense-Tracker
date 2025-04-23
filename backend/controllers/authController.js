@@ -4,9 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {expiresIn: '1h',});
+    return jwt.sign({ id }, process.env.JWT_SECRET, {expiresIn: '7d',});
 };
-
 exports.registerUser = async (req, res) => {
     const { fullName, email, password, profileImageUrl } = req.body;
     if (!req.body||Object.keys(req.body).length === 0) {
