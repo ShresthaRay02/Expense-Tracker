@@ -18,10 +18,8 @@ const RecentTransactions = ({transactions, onSeeMore}) => {
             </button>
         </div>
 
-        
-
         <div className='mt-6'>
-            {transactions?.map((item)=>(
+            {transactions?.slice(0, 5).map((item)=>(
                 <TransactionsInfoCard 
                     key = {item._id}
                     title = {item.type === 'expense' ? item.category :item.source}

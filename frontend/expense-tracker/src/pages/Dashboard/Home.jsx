@@ -11,9 +11,11 @@ import ExpenseTransactions  from '../../components/Dashboard/ExpenseTransactions
 import Last30DaysExpenses from '../../components/Dashboard/Last30DaysExpenses';
 import RecentIncomeWithChart from '../../components/Dashboard/RecentIncomeWithChart';
 
+
 import {LuHandCoins,LuWalletMinimal,} from "react-icons/lu";
 import {IoMdCard} from "react-icons/io";
 import { addThousandsSeperator } from '../../utils/helper';
+import RecentIncome from '../../components/Dashboard/RecentIncome';
 
 const Home = () => {
   useUserAuth();
@@ -35,6 +37,7 @@ const Home = () => {
         console.log('Full Dashboard API Response:', JSON.stringify(response.data, null, 2));
         console.log('Recent Transactions:', response.data.recentTransactions);
         console.log('Total Income:', response.data.totalIncome);
+        console.log('Last 60 Days Income:', response.data.last60DaysIncomeTransactions);
         setDashboardData(response.data);
       }
     } catch (error){
@@ -100,6 +103,11 @@ const Home = () => {
           <RecentIncomeWithChart 
             data = {dashboardData?.recentTransactions || []}
             totalIncome = {dashboardData?.totalIncome||0}
+          />
+          
+          <RecentIncome
+            transactions={dashboardData?.last60DaysIncomeTransactions?.transactions || []}
+            onSeeMore={()=> navigate("/income")}
           />
           
         </div>
