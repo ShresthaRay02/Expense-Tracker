@@ -4,6 +4,9 @@ import CustomTooltip from './CustomTooltip';
 import CustomLegend from './CustomLegend';
 
 const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
+  console.log('PieChart received data:', data);
+  console.log('PieChart received colors:', colors);
+
   return (
     <div style={{ position: 'relative', width: '100%', height: '380px' }}>
       <ResponsiveContainer width="100%" height="100%">
@@ -18,12 +21,19 @@ const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
             innerRadius={100}
             labelLine={false}
           >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index%colors.length]}/>
-            ))}
+            {data.map((entry, index) => {
+              const color = colors[index % colors.length];
+              console.log(`Slice ${index} (${entry.name}) using color:`, color);
+              return <Cell key={`cell-${index}`} fill={color}/>;
+            })}
           </Pie>
           <Tooltip content={<CustomTooltip/>}/>
-          <Legend content={<CustomLegend/>}/>
+          <Legend 
+            content={<CustomLegend/>}
+            layout="horizontal"
+            verticalAlign="bottom"
+            align="center"
+          />
         </PieChart>
       </ResponsiveContainer>
       {showTextAnchor && (
@@ -40,14 +50,17 @@ const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '4px',
-          marginTop: '-10px'
+          gap: '8px',
+          zIndex: 1
         }}>
           <div style={{ 
             color: '#666', 
             fontSize: '16px', 
             fontWeight: '500',
-            lineHeight: '1.2'
+            lineHeight: '1.2',
+            backgroundColor: 'white',
+            padding: '4px 8px',
+            borderRadius: '4px'
           }}>
             {label}
           </div>
@@ -55,7 +68,10 @@ const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
             color: '#333', 
             fontSize: '20px', 
             fontWeight: '600',
-            lineHeight: '1.2'
+            lineHeight: '1.2',
+            backgroundColor: 'white',
+            padding: '4px 8px',
+            borderRadius: '4px'
           }}>
             {totalAmount}
           </div>

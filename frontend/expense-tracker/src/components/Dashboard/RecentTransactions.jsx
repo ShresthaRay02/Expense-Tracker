@@ -2,8 +2,12 @@ import React from 'react'
 import { LuArrowRight } from 'react-icons/lu'
 import moment from 'moment';
 import TransactionsInfoCard from '../Cards/TransactionsInfoCard';
+import CustomBarChart from '../Charts/CustomBarChart';
+import { prepareExpenseBarChartData } from '../../utils/helper';
 
 const RecentTransactions = ({transactions, onSeeMore}) => {
+  const chartData = prepareExpenseBarChartData(transactions);
+
   return (
     <div className='card'>
         <div className='flex items-center justify-between'>
@@ -13,6 +17,8 @@ const RecentTransactions = ({transactions, onSeeMore}) => {
                 See All <LuArrowRight className='text-base'/>
             </button>
         </div>
+
+        
 
         <div className='mt-6'>
             {transactions?.map((item)=>(

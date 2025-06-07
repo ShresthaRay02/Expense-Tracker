@@ -9,11 +9,11 @@ import RecentTransactions from '../../components/Dashboard/RecentTransactions';
 import FinanceOverview from '../../components/Dashboard/FinanceOverview';
 import ExpenseTransactions  from '../../components/Dashboard/ExpenseTransactions';
 import Last30DaysExpenses from '../../components/Dashboard/Last30DaysExpenses';
+import RecentIncomeWithChart from '../../components/Dashboard/RecentIncomeWithChart';
 
 import {LuHandCoins,LuWalletMinimal,} from "react-icons/lu";
 import {IoMdCard} from "react-icons/io";
 import { addThousandsSeperator } from '../../utils/helper';
-
 
 const Home = () => {
   useUserAuth();
@@ -32,10 +32,13 @@ const Home = () => {
         `${API_PATHS.DASHBOARD.GET_DATA}`
       );
       if (response.data){
+        console.log('Full Dashboard API Response:', JSON.stringify(response.data, null, 2));
+        console.log('Recent Transactions:', response.data.recentTransactions);
+        console.log('Total Income:', response.data.totalIncome);
         setDashboardData(response.data);
       }
     } catch (error){
-        console.log("Something went wrong. Please try again.". error)
+        console.log("Something went wrong. Please try again.", error)
     } finally {
       setLoading(false);
     }
@@ -94,6 +97,10 @@ const Home = () => {
             data = { dashboardData?.last30DaysExpenses?.transactions || []}
           />
 
+          <RecentIncomeWithChart 
+            data = {dashboardData?.recentTransactions || []}
+            totalIncome = {dashboardData?.totalIncome||0}
+          />
           
         </div>
       </div>
