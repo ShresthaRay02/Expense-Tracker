@@ -3,7 +3,6 @@ import { LuArrowRight } from 'react-icons/lu'
 import moment from 'moment';
 import TransactionsInfoCard from '../Cards/TransactionsInfoCard';
 
-
 const RecentTransactions = ({transactions, onSeeMore}) => {
   return (
     <div className='card'>
@@ -15,7 +14,7 @@ const RecentTransactions = ({transactions, onSeeMore}) => {
             </button>
         </div>
 
-         <div className='mt-6'>
+        <div className='mt-6'>
             {transactions?.map((item)=>(
                 <TransactionsInfoCard 
                     key = {item._id}

@@ -29,29 +29,41 @@ const CustomBarChart = ({data}) => {
                 </div>
             )
         }
-    }
+        return null;
+    };
 
   return (
-    <div className='bg-white mt-6'>
-        <ResponsiveContainer width ="100%" height={300}>
-            <BarChart data={data}>
-                <CartesianGrid stroke="none"/>
+    <div className='bg-white mt-6 h-[450px]'>
+        <ResponsiveContainer width="100%" height="100%">
+            <BarChart 
+                data={data}
+                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            >
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0"/>
 
-                <XAxis dataKey="month" tick={{fontSize:12, fill:"#555"}} stroke="none"/>
-                <YAxis tick={{fontSize:12, fill:"#555"}} stroke="none"/>
+                <XAxis 
+                    dataKey="month" 
+                    tick={{fontSize: 12, fill: "#555"}} 
+                    stroke="none"
+                    axisLine={false}
+                    tickLine={false}
+                />
+                <YAxis 
+                    tick={{fontSize: 12, fill: "#555"}} 
+                    stroke="none"
+                    axisLine={false}
+                    tickLine={false}
+                />
 
                 <Tooltip content={CustomTooltip}/>
 
                 <Bar 
                     dataKey="amount"
                     fill="#FF8042"
-                    radius={[10,10,0,0]}
-                    activeDot={{r:8, fill:"yellow"}}
-                    activeStyle={{fill:"green"}}
+                    radius={[10, 10, 0, 0]}
                 >
                     {data.map((entry, index) =>(
                         <Cell key={index} fill={getBarColor(index)}/>
-
                     ))}
                 </Bar>
             </BarChart>
