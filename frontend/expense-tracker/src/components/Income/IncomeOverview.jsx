@@ -23,7 +23,7 @@ const IncomeOverview = ({transactions, onAddIncome}) => {
         </p>
       </div>
 
-      <button className = 'add-btn bg-white text-black border-gray-300' onClick = {onAddIncome}>
+      <button className = 'flex items-center gap-1.5 text-xs md:text-sm font-medium text-purple-700 whitespace-nowrap bg-purple-100 border border-purple-300 rounded-lg px-4 py-2 cursor-pointer hover:bg-purple-200' onClick = {onAddIncome}>
         <LuPlus className='text-lg'/>
         Add Income
       </button>
