@@ -3,7 +3,7 @@ import { LuArrowRight } from 'react-icons/lu'
 import TransactionsInfoCard from '../Cards/TransactionsInfoCard';
 import moment from "moment";
 
- const ExpenseTransactions = ({transactions, onSeeMore}) => {
+const ExpenseTransactions = ({transactions = [], onSeeMore}) => {
   return (
     <div className='card'>
       <div className='flex items-center justify-between'>
@@ -15,19 +15,24 @@ import moment from "moment";
       </div>
 
       <div className='mt-6'>
-        {transactions?.slice(0,5)?.map((expense) =>(
-          <TransactionsInfoCard
-            key={expense._id}
-            title={expense.category}
-            icon={expense.icon}
-            date={moment(expense.date).format('DD MMM YYYY')}
-            amount={expense.amount}
-            type='expense'
-            hideDeleteBtn
-          />
-          ))}
+        {transactions && transactions.length > 0 ? (
+          transactions.slice(0,5).map((expense) => (
+            <TransactionsInfoCard
+              key={expense._id}
+              title={expense.category}
+              icon={expense.icon}
+              date={moment(expense.date).format('DD MMM YYYY')}
+              amount={expense.amount}
+              type='expense'
+              hideDeleteBtn
+            />
+          ))
+        ) : (
+          <p className="text-gray-500 text-center py-4">No expenses found</p>
+        )}
       </div>
     </div>
   );
 };
+
 export default ExpenseTransactions;
